@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 [ -z "${HOSTEXT_NAME}" ] && echo "Hostapp extension  name needs to be defined" && exit 1
 [ -z "${MACHINE}" ] && echo "Device type needs to be defined" && exit 1
