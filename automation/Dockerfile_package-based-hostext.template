@@ -24,6 +24,7 @@ COPY feed /\n\
 RUN priority=1; for arch in $ARCH_LIST; do echo "arch $arch $priority" >> /etc/opkg/opkg.conf; priority=$(expr $priority + 5); echo "src/gz balena-$arch $FEED_URL/$arch" >> /etc/opkg/opkg.conf; done\n\
 RUN mkdir /hostapp\n\
 RUN opkg -f /etc/opkg/opkg.conf update && opkg -f /etc/opkg/opkg.conf --nodeps --dest=hostapp install ${PACKAGES} || true\n\
+RUN rm -rf /hostapp/var/lib/opkg\n\
 FROM scratch\n\
 LABEL io.balena.features.host-extension=1\n\
 COPY --from=builder /hostapp /'\
